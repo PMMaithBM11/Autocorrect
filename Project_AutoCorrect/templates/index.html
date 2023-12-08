@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>AutoSuggest and Autocorrect System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+            max-width: 600px;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        #suggestions {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1 class="mb-4">AutoSuggest and Autocorrect System</h1>
+            <form method="POST" action="/suggest">
+                <div class="form-group">
+                    <label for="keyword">Enter a word:</label>
+                    <input type="text" class="form-control" id="keyword" name="keyword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Get Suggestions</button>
+            </form>
+        </div>
+
+        <div id="suggestions">
+            {% if suggestions %}
+            <div class="mt-4">
+                <h4>Suggestions:</h4>
+                <ul class="list-group">
+                    {% for suggestion in suggestions %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ suggestion['Word'] }}
+                        <span class="badge badge-primary badge-pill">{{ suggestion['Similarity'] }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% else %}
+            <p class="mt-4">No suggestions available.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
